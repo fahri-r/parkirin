@@ -24,7 +24,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Footer from "../components/layout/auth/footer";
 import PageContainer from "../components/layout/auth/pageContainer";
-import withSession from "../lib/Session";
+import withSession from "../lib/session";
 import toast, { Toaster } from "react-hot-toast";
 import NextLink from "next/link";
 import { db } from "../lib/db.server";

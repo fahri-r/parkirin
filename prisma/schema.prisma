@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String
+  password  String
+  role      Role       @default(MEMBER)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Member    Member[]
+  Employee  Employee[]
+}
+
+model Member {
+  id        Int       @id @default(autoincrement())
+  avatar    String
+  name      String
+  phone     String
+  address   String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int       @unique
+  vehicle   Vehicle   @relation(fields: [vehicleId], references: [id])
+  vehicleId Int       @unique
+  Parking   Parking[]
+}
+
+model Employee {
+  id      Int       @id @default(autoincrement())
+  avatar  String
+  name    String
+  phone   String
+  address String
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int       @unique
+  Parking Parking[]
+}
+
+model Vehicle {
+  id           Int      @id @default(autoincrement())
+  name         String
+  licensePlate String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Member       Member[]
+}
+
+model ParkingArea {
+  id             Int          @id @default(autoincrement())
+  number         Int
+  parkingBlock   ParkingBlock @relation(fields: [parkingBlockId], references: [id])
+  parkingBlockId Int
+  available      Boolean      @default(true)
+  Parking        Parking[]
+}
+
+model ParkingBlock {
+  id          Int           @id @default(autoincrement())
+  name        String
+  ParkingArea ParkingArea[]
+}
+
+model Parking {
+  id            Int         @id @default(autoincrement())
+  member        Member      @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId      Int
+  employee      Employee?   @relation(fields: [employeeId], references: [id])
+  employeeId    Int?
+  parkingArea   ParkingArea @relation(fields: [parkingAreaId], references: [id])
+  parkingAreaId Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  done          Boolean     @default(false)
+}
+
+enum Role {
+  MEMBER
+  EMPLOYEE
+}

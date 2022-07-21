@@ -7,6 +7,7 @@ export default function PageContainer(props) {
       bg="secondary.background"
       minHeight="100vh"
       width="fit-content"
+      minWidth="100%"
       alignItems="center"
       justifyContent="top"
       flexDirection="column"

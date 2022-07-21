@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import Table from "../components/dashboard/table";
 import Footer from "../components/layout/footer";
 import Nav from "../components/layout/nav";

@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-import bcrypt from "bcryptjs";
+import moment from "moment";
+import { useRouter } from "next/router";
 import { BsCardHeading } from "react-icons/bs";
 import {
   FaCar,
@@ -23,10 +24,6 @@ import {
   FaPhone,
   FaUser,
 } from "react-icons/fa";
-
-import { PrismaClient } from "@prisma/client";
-import moment from "moment";
-import { useRouter } from "next/router";
 import Footer from "../../../components/layout/auth/footer";
 import PageContainer from "../../../components/layout/auth/pageContainer";
 import serverProps from "../../../lib/authentication";

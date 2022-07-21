@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   Box,
   Button,
@@ -16,7 +14,11 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import {
   FaImage,
   FaLock,
@@ -24,11 +26,6 @@ import {
   FaRegEnvelope,
   FaRegUser,
 } from "react-icons/fa";
-
-import NextLink from "next/link";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
 import Footer from "../../components/layout/footer";
 import Nav from "../../components/layout/nav";
 import PageContainer from "../../components/layout/pageContainer";

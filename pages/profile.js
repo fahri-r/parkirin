@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Container,
   Box,
@@ -18,7 +17,6 @@ import {
   Heading,
   Textarea,
 } from "@chakra-ui/react";
-
 import {
   FaRegEnvelope,
   FaLock,
@@ -27,7 +25,6 @@ import {
   FaCar,
 } from "react-icons/fa";
 import { BsCardHeading } from "react-icons/bs";
-
 import PageContainer from "../components/layout/pageContainer";
 import PageContent from "../components/layout/pageContent";
 import Nav from "../components/layout/nav";

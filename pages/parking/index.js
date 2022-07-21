@@ -1,26 +1,12 @@
+import { Box, Button, HStack, Spacer, VStack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
-
+import toast, { Toaster } from "react-hot-toast";
+import Footer from "../../components/layout/footer";
+import Nav from "../../components/layout/nav";
 import PageContainer from "../../components/layout/pageContainer";
 import PageContent from "../../components/layout/pageContent";
-import Nav from "../../components/layout/nav";
-import Footer from "../../components/layout/footer";
-import Table from "../../components/table";
 import serverProps from "../../lib/authentication";
-import Authorization from "../../lib/authorization";
-import { PrismaClient } from "@prisma/client";
-import {
-  SimpleGrid,
-  Box,
-  Text,
-  HStack,
-  VStack,
-  Spacer,
-  Grid,
-  GridItem,
-  Button,
-} from "@chakra-ui/react";
-import toast, { Toaster } from "react-hot-toast";
-import { useRouter } from "next/router";
 import { db } from "../../lib/db.server";
 
 const prisma = db;

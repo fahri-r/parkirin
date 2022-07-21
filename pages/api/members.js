@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import { db } from "../../lib/db.server";
 
 const prisma = db;

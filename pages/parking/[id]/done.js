@@ -37,8 +37,8 @@ const prisma = db;
 export default function Login({ account, parking }) {
   const duration = moment.duration(moment().diff(moment(parking.createdAt)));
   const hours = duration.asHours();
-  const cost = Math.floor(hours) * 1000;
-  const totalCost = cost ? cost : 1000;
+  const cost = Math.floor(hours) * process.env.NEXT_PUBLIC_PARKING_COST;
+  const totalCost = cost ? cost : process.env.NEXT_PUBLIC_PARKING_COST;
 
   const router = useRouter();
 

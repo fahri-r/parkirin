@@ -6,7 +6,7 @@ export default function PageContainer(props) {
     <Flex
       bg="secondary.background"
       minHeight="100vh"
-      width="100%"
+      width="fit-content"
       alignItems="center"
       justifyContent="top"
       flexDirection="column"

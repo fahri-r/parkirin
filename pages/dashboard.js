@@ -1,18 +1,32 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import Table from "../components/dashboard/table";
+import Footer from "../components/layout/footer";
+import Nav from "../components/layout/nav";
 import PageContainer from "../components/layout/pageContainer";
 import PageContent from "../components/layout/pageContent";
-import Nav from "../components/layout/nav";
-import Footer from "../components/layout/footer";
-import Table from "../components/dashboard/table";
 import serverProps from "../lib/authentication";
-import Authorization from "../lib/authorization";
 import { db } from "../lib/db.server";
 
 const prisma = db;
 
 export default function History({ account, parking }) {
   // Authorization(account, "MEMBER");
+
+  const [parkingData, setParkingData] = useState(parking);
+  useEffect(() => {}, [parkingData]);
+
+  const handleSearch = (e) => {
+    if (e.target.value) {
+      setParkingData(
+        parking.filter((parking) =>
+          parking.id.toString().includes(e.target.value)
+        )
+      );
+    } else {
+      setParkingData(parking);
+    }
+  };
 
   let headers = [
     {
@@ -38,7 +52,7 @@ export default function History({ account, parking }) {
   ];
 
   let items = [];
-  parking.map((parking) => {
+  parkingData.map((parking) => {
     let status = parking.done ? "Done" : "Still";
     items.push({
       id: parking.id,
@@ -54,6 +68,12 @@ export default function History({ account, parking }) {
     <PageContainer isFixedNav>
       <Nav role={account.role} />
       <PageContent title="Dashboard">
+        <InputGroup bgColor="white" mb={5}>
+          <InputLeftAddon bgColor="main.500" color="white">
+            Search by Id
+          </InputLeftAddon>
+          <Input type="tel" onChange={handleSearch} />
+        </InputGroup>
         <Table headers={headers} items={items} />
       </PageContent>
       <Footer />

@@ -35,9 +35,6 @@ export default function CustomTable({
   bg = "secondary.card",
   color = "gray.800",
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
-
   let itemsIds = items.map((item) => item.id);
   let [localSelected, setLocalSelected] = useState(selected);
   const setCheckedItems = (isChecked) => {
@@ -53,9 +50,6 @@ export default function CustomTable({
       : setLocalSelected(localSelected.filter((i) => i !== item));
   };
 
-  const handleDelete = (data) => {
-    console.log(data);
-  };
   return (
     <Box
       className="custom-table-container"

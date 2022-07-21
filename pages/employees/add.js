@@ -87,6 +87,11 @@ export default function Profile({ account, users }) {
                       disabled={isSubmitting}
                     />
                   </InputGroup>
+                  {errors.name && (
+                    <Text fontSize="sm" color="red">
+                      Name is required.
+                    </Text>
+                  )}
                 </FormControl>
                 <FormControl>
                   <FormLabel htmlFor="email">Email Address</FormLabel>
@@ -104,6 +109,11 @@ export default function Profile({ account, users }) {
                       disabled={isSubmitting}
                     />
                   </InputGroup>
+                  {errors.email && (
+                    <Text fontSize="sm" color="red">
+                      Email is required.
+                    </Text>
+                  )}
                 </FormControl>
                 <FormControl>
                   <FormLabel htmlFor="avatar">Avatar URL</FormLabel>
@@ -121,6 +131,11 @@ export default function Profile({ account, users }) {
                       disabled={isSubmitting}
                     />
                   </InputGroup>
+                  {errors.avatar && (
+                    <Text fontSize="sm" color="red">
+                      Avatar is required.
+                    </Text>
+                  )}
                 </FormControl>
                 <FormControl>
                   <FormLabel htmlFor="phone">Phone</FormLabel>
@@ -138,6 +153,11 @@ export default function Profile({ account, users }) {
                       disabled={isSubmitting}
                     />
                   </InputGroup>
+                  {errors.phone && (
+                    <Text fontSize="sm" color="red">
+                      Phone is required.
+                    </Text>
+                  )}
                 </FormControl>
                 <FormControl>
                   <FormLabel htmlFor="address">Address</FormLabel>
@@ -151,6 +171,11 @@ export default function Profile({ account, users }) {
                     {...register("address", { required: true })}
                     disabled={isSubmitting}
                   />
+                  {errors.address && (
+                    <Text fontSize="sm" color="red">
+                      Address is required.
+                    </Text>
+                  )}
                 </FormControl>
               </Stack>
             </Box>
@@ -184,6 +209,11 @@ export default function Profile({ account, users }) {
                       disabled={isSubmitting}
                     />
                   </InputGroup>
+                  {errors.password && (
+                    <Text fontSize="sm" color="red">
+                      Password is required.
+                    </Text>
+                  )}
                 </FormControl>
                 <FormControl>
                   <Stack justifyContent="space-between" isInline>
@@ -215,6 +245,11 @@ export default function Profile({ account, users }) {
                       disabled={isSubmitting}
                     />
                   </InputGroup>
+                  {errors.passwordConfirmation && (
+                    <Text fontSize="sm" color="red">
+                      {errors.passwordConfirmation.message}
+                    </Text>
+                  )}
                 </FormControl>
               </Stack>
             </Box>
@@ -249,6 +284,21 @@ export default function Profile({ account, users }) {
 
 export async function getServerSideProps(ctx) {
   const authProps = await serverProps(ctx);
+
+  if (authProps.props.account.role !== "EMPLOYEE") {
+    let destination = "/dashboard";
+    if (authProps.props.account.role == "MEMBER") {
+      destination = "/history";
+    }
+
+    return {
+      redirect: {
+        permanent: false,
+        destination,
+      },
+    };
+  }
+
   const users = await prisma.user.findMany();
 
   users.map((x) => {

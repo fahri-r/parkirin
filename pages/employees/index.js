@@ -65,6 +65,21 @@ export default function Employees({ account, employees }) {
 
 export async function getServerSideProps(ctx) {
   const authProps = await serverProps(ctx);
+
+  if (authProps.props.account.role !== "EMPLOYEE") {
+    let destination = "/dashboard";
+    if (authProps.props.account.role == "MEMBER") {
+      destination = "/history";
+    }
+
+    return {
+      redirect: {
+        permanent: false,
+        destination,
+      },
+    };
+  }
+
   const employees = await prisma.employee.findMany({
     include: {
       user: true,

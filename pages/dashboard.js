@@ -6,13 +6,12 @@ import Nav from "../components/layout/nav";
 import PageContainer from "../components/layout/pageContainer";
 import PageContent from "../components/layout/pageContent";
 import serverProps from "../lib/authentication";
+import Authorization from "../lib/authorization";
 import { db } from "../lib/db.server";
 
 const prisma = db;
 
 export default function History({ account, parking }) {
-  // Authorization(account, "MEMBER");
-
   const [parkingData, setParkingData] = useState(parking);
   useEffect(() => {}, [parkingData]);
 
@@ -83,6 +82,21 @@ export default function History({ account, parking }) {
 
 export async function getServerSideProps(ctx) {
   const authProps = await serverProps(ctx);
+
+  if (authProps.props.account.role !== "EMPLOYEE") {
+    let destination = "/dashboard";
+    if (authProps.props.account.role == "MEMBER") {
+      destination = "/history";
+    }
+
+    return {
+      redirect: {
+        permanent: false,
+        destination,
+      },
+    };
+  }
+
   const parking = await prisma.parking.findMany({
     orderBy: {
       done: "asc",

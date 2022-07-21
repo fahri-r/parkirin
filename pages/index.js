@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import getServerSideProps from "../lib/authentication";
+import serverProps from "../lib/authentication";
 
 export default function Home({ account }) {
   const router = useRouter();
@@ -43,4 +43,22 @@ export default function Home({ account }) {
   );
 }
 
-export { getServerSideProps };
+export async function getServerSideProps(ctx) {
+  const authProps = await serverProps(ctx);
+
+  let destination = "/signin";
+  if (authProps.props) {
+    if (authProps.props.account.role == "MEMBER") {
+      destination = "/history";
+    } else if (authProps.props.account.role == "EMPLOYEE") {
+      destination = "/dashboard";
+    }
+  }
+
+  return {
+    redirect: {
+      permanent: false,
+      destination,
+    },
+  };
+}

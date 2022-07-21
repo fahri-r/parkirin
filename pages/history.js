@@ -61,6 +61,21 @@ export default function History({ account, parking }) {
 
 export async function getServerSideProps(ctx) {
   const authProps = await serverProps(ctx);
+
+  if (authProps.props.account.role !== "MEMBER") {
+    let destination = "/dashboard";
+    if (authProps.props.account.role == "MEMBER") {
+      destination = "/history";
+    }
+
+    return {
+      redirect: {
+        permanent: false,
+        destination,
+      },
+    };
+  }
+
   const parking = await prisma.parking.findMany({
     where: { memberId: authProps.props.account.memberId },
     orderBy: {

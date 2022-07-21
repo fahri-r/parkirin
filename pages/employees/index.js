@@ -46,7 +46,7 @@ export default function Employees({ account, employees }) {
 
   return (
     <PageContainer isFixedNav>
-      <Nav role={account.role} />
+      <Nav role={account.role} avatar={account.avatar} />
       <PageContent
         title="Employees"
         primaryAction={{

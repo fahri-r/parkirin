@@ -24,6 +24,9 @@ async function handler(req, res) {
   const getEmployeeId = findUser[0].Employee.length
     ? findUser[0].Employee[0].id
     : "";
+  const getAvatar = findUser[0].Member.length
+    ? findUser[0].Member[0].avatar
+    : findUser[0].Employee[0].id;
 
   // get user from database then:
   req.session.set("user", {
@@ -32,6 +35,7 @@ async function handler(req, res) {
     role: getRole,
     memberId: getMemberId,
     employeeId: getEmployeeId,
+    avatar: getAvatar,
   });
   await req.session.save();
   res.send("Logged in");

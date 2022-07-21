@@ -64,7 +64,7 @@ export default function Profile({ account, users }) {
   return (
     <PageContainer isFixedNav>
       <Toaster position="top-center" reverseOrder={true} />
-      <Nav role={account.role} />
+      <Nav role={account.role} avatar={account.avatar} />
       <PageContent centerContent={true}>
         <Container maxW="container.sm">
           <Heading marginBottom="1.5rem">Edit Employee</Heading>

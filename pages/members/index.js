@@ -46,7 +46,7 @@ export default function Members({ account, members }) {
 
   return (
     <PageContainer isFixedNav>
-      <Nav role={account.role} />
+      <Nav role={account.role} avatar={account.avatar} />
       <PageContent title="Members">
         <Table selectable selected={[]} headers={headers} items={items} />
       </PageContent>

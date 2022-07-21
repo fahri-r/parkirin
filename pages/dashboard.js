@@ -65,7 +65,7 @@ export default function History({ account, parking }) {
 
   return (
     <PageContainer isFixedNav>
-      <Nav role={account.role} />
+      <Nav role={account.role} avatar={account.avatar} />
       <PageContent title="Dashboard">
         <InputGroup bgColor="white" mb={5}>
           <InputLeftAddon bgColor="main.500" color="white">

@@ -87,7 +87,7 @@ export default function Parking({ account, parkingArea, parking }) {
   return (
     <PageContainer isFixedNav>
       <Toaster position="top-center" reverseOrder={true} />
-      <Nav role={account.role} />
+      <Nav role={account.role} avatar={account.avatar} />
       <PageContent title="Book Parking Area">
         <Box
           width="100%"

@@ -50,7 +50,7 @@ export default function History({ account, parking }) {
 
   return (
     <PageContainer isFixedNav>
-      <Nav role={account.role} />
+      <Nav role={account.role} avatar={account.avatar} />
       <PageContent title="History">
         <Table headers={headers} items={items} />
       </PageContent>
